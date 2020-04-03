@@ -175,42 +175,41 @@ exo[15].ch1.addEventListener('blur', () => {
   actual_style.height = "16px";
 })
 
-const CarresExo1 = Array.from(document.getElementsByClassName("1_exo_carre carre"));
-CarresExo1.forEach((carre) => {
+const exo_carres_1 = Array.from(document.getElementsByClassName("1_exo_carre carre"));
+exo_carres_1.forEach((carre) => {
   carre.addEventListener("click", () => {
-    CarresExo1.map((allCarre) => allCarre.classList.remove("checked"));
+    exo_carres_1.map((allCarre) => allCarre.classList.remove("checked"));
     carre.classList.add("checked");
   });
 });
 
-const CarresExo2 = Array.from(document.getElementsByClassName("2_exo_carre carre"));
-const ClasseExo2 = document.getElementById("out").classList;
-let lastClasse = "blanc";
-CarresExo2.forEach((carre) => {
+const exo_carres_2 = Array.from(document.getElementsByClassName("2_exo_carre carre"));
+const exo_classe_2 = document.getElementById("out").classList;
+let last_class = "blanc";
+exo_carres_2.forEach((carre) => {
   carre.addEventListener("click", () => {
-    CarresExo2.map((allCarre) => allCarre.classList.remove("checked"));
+    exo_carres_2.map((allCarre) => allCarre.classList.remove("checked"));
     carre.classList.add("checked");
-    ClasseExo2.replace(lastClasse, carre.getAttribute("data-color"));
-    lastClasse = carre.getAttribute("data-color");
+    exo_classe_2.replace(last_class, carre.getAttribute("data-color"));
+    last_class = carre.getAttribute("data-color");
   });
 });
 
-const ExoBonusDivGauche = document.getElementById("exo-img-div-g");
-const ExoBonusImgsGauche = ExoBonusDivGauche.getElementsByTagName("img");
-const ExoBonusImgDroite = document.getElementById("idroite");
-const ExoBonusDivDroite = document.getElementsByClassName("droite");
-let Last_Img_Clicked;
+const exobonusDivGauche = document.getElementById("exo-img-div-g");
+const exobonusImgsGauche = exobonusDivGauche.getElementsByTagName("img");
+const exobonusImgDroite = document.getElementById("idroite");
+let last_img_clicked;
 let dragged;
-Array.from(ExoBonusImgsGauche).forEach((img) => {
+Array.from(exobonusImgsGauche).forEach((img) => {
   img.draggable = true;
   img.addEventListener('click', () => {
-    Last_Img_Clicked = img;
+    last_img_clicked = img;
   })
 })
-ExoBonusImgDroite.addEventListener('click', () => {
-  ExoBonusImgDroite.src = Last_Img_Clicked.src;
-  ExoBonusImgDroite.height = Last_Img_Clicked.height;
-  ExoBonusImgDroite.width = Last_Img_Clicked.width;
+exobonusImgDroite.addEventListener('click', () => {
+  exobonusImgDroite.src = last_img_clicked.src;
+  exobonusImgDroite.height = last_img_clicked.height;
+  exobonusImgDroite.width = last_img_clicked.width;
 })
 
 document.addEventListener("drag", function(event) {
@@ -221,7 +220,7 @@ document.addEventListener("dragstart", function(event) {
 }, false);
 
 document.addEventListener("dragend", function(event) {
-  event.target.style.opacity = "";
+  exobonusImgDroite.style.opacity = "1";
 }, false);
 
 document.addEventListener("dragover", function(event) {
@@ -229,25 +228,25 @@ document.addEventListener("dragover", function(event) {
 }, false);
 
 document.addEventListener("dragenter", function(event) {
-  if(event.target.className === "droite" || event.target === ExoBonusImgDroite) {
-    ExoBonusImgDroite.style.opacity = "0.5";
+  if(event.target.className === "droite" || event.target === exobonusImgDroite) {
+    exobonusImgDroite.style.opacity = "0.25";
   }
 }, false);
 
 document.addEventListener("dragleave", function(event) {
-  if(event.target.className === "droite" || event.target === ExoBonusImgDroite) {
-    ExoBonusImgDroite.style.opacity = "1";
+  if(event.target === exobonusImgDroite) {
+    exobonusImgDroite.style.opacity = "1";
   }
 }, false);
 
 document.addEventListener("drop", function(event) {
   const data = event.dataTransfer.getData("text/plain");
   event.preventDefault();
-  if (event.target.className === "droite" || event.target === ExoBonusImgDroite) {
-    ExoBonusImgDroite.src = dragged.src;
-    ExoBonusImgDroite.height = dragged.height;
-    ExoBonusImgDroite.width = dragged.width;
-    ExoBonusImgDroite.style.opacity = "1";
+  if (event.target.className === "droite" || event.target === exobonusImgDroite) {
+    exobonusImgDroite.src = dragged.src;
+    exobonusImgDroite.height = dragged.height;
+    exobonusImgDroite.width = dragged.width;
+    exobonusImgDroite.style.opacity = "1";
   }
 
 }, false);
